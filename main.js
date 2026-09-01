@@ -9,7 +9,7 @@ const levels = {
                 t: 'Nível 2 — Cuidado com as paredes', 
                 c: 'Contorne as paredes e chegue à bandeira. Se bater numa parede, corrija seu programa!', 
                 s: [3, 0], 
-                b: [['f', 'f', 'f', 'g'], ['f', 'f', 'x', 'f'], ['f', 'f', 'w', 'w'], ['f', 'x', 'w', 'w']] 
+                b: [['f', 'f', 'x', 'g'], ['f', 'f', 'x', 'f'], ['f', 'f', 'w', 'w'], ['f', 'x', 'w', 'w']] 
             }
 };
 
