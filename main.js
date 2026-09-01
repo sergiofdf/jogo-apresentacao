@@ -31,15 +31,13 @@ let lv = 1, prog = [], st = null, running = false;
 function level(n) { 
     if (running) return; 
     lv = n; 
-    rog = []; 
+    prog = []; 
     reset();
     
     document.querySelectorAll('.lvl').forEach(x => x.classList.remove('active')); 
     document.getElementById('b' + n).classList.add('active'); 
     document.getElementById('title').textContent = levels[n].t;
     document.getElementById('challenge').textContent = levels[n].c; 
-
-    
 
     if (version === 'v2') {
 
