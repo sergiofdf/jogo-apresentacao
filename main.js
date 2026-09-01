@@ -1,4 +1,4 @@
-const version = 'v2';
+const version = 'v1';
 
 const levels = {
             1: { 
@@ -132,6 +132,7 @@ async function run() {
         let target = x.b[nr][nc];
         if (target === 'x') { msg('🧱 PAREDE! O personagem ficou travado. Corrija a instrução e tente novamente!', 'warn'); running = false; return }
         st.r = nr; st.c = nc; st.last = p; st.steps++; render();
+        if (target === 'w' && version === 'v2') { await sleep(250); msg('😥AIII! O personagem caiu na armadilha. Missão encerrada!', 'bad'); running = false; return }
         if (target === 'w') { await sleep(250); msg('💦 SPLASH! O personagem caiu na água. Missão encerrada!', 'bad'); running = false; return }
         if (target === 'g') { await sleep(250); msg('🎉 PARABÉNS! Você programou o personagem para chegar ao destino!', 'ok'); running = false; return }
     }
