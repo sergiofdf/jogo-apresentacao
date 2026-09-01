@@ -20,6 +20,7 @@ let icon = { f: '👣', w: '💧', x: '🧱', g: '🏁' };
 if(version === 'v2')
 {
     icon = { f: '🧀', w: '🪤', x: '🧱', g: '🏁' };
+    levels[1].c = 'Chegue à bandeira usando as setas. Evite as armadilhas.';
 }
 
 const commandIcons = { U: '↑', D: '↓', L: '←', R: '→' };
@@ -40,6 +41,8 @@ function level(n) {
     document.getElementById('challenge').textContent = levels[n].c; 
 
     if (version === 'v2') {
+        const title = document.querySelector('title');
+        title.textContent = 'Missão: Programar o Rato';
 
         const h1 = document.querySelector('h1');
         h1.textContent = '🐭 Missão: Programar o Rato';
