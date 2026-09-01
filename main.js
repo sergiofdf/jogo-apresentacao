@@ -1,4 +1,4 @@
-const version = 'v1';
+const version = 'v2';
 
 const levels = {
             1: { 
@@ -15,11 +15,11 @@ const levels = {
             }
 };
 
-let icon = { f: '👣', w: '💧', x: '🧱', z: '💣', g: '🏁' };
+let icon = { f: '👣', w: '💧', x: '🧱', g: '🏁' };
 
 if(version === 'v2')
 {
-    icon = { f: '🧀', w: '🪤', x: '🧱', z: '💣', g: '🏁' };
+    icon = { f: '🧀', w: '🪤', x: '🧱', g: '🏁' };
 }
 
 const commandIcons = { U: '↑', D: '↓', L: '←', R: '→' };
@@ -71,7 +71,7 @@ function render() {
     b.innerHTML = ''; 
     x.b.forEach((row, r) => row.forEach((type, c) => { 
         let e = document.createElement('div'); 
-        e.className = 'cell ' + ({ f: 'free', w: 'water', x: 'wall', z: 'bomb', g: 'finish' }[type]); 
+        e.className = 'cell ' + ({ f: 'free', w: 'water', x: 'wall', g: 'finish' }[type]); 
         e.textContent = icon[type]; 
         if (r === x.s[0] && c === x.s[1]) e.classList.add('start'); 
         if (st && st.r === r && st.c === c) { 
