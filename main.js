@@ -1,3 +1,5 @@
+const version = 'v1';
+
 const levels = {
             1: { 
                 t: 'Nível 1 — Primeira missão', 
@@ -13,8 +15,12 @@ const levels = {
             }
 };
 
-const icon = { f: '👣', w: '💧', x: '🧱', z: '💣', g: '🏁' };
-// const icon = { f: '🧀', w: '🪤', x: '🧱', z: '💣', g: '🏁' };
+let icon = { f: '👣', w: '💧', x: '🧱', z: '💣', g: '🏁' };
+
+if(version === 'v2')
+{
+    icon = { f: '🧀', w: '🪤', x: '🧱', z: '💣', g: '🏁' };
+}
 
 const commandIcons = { U: '↑', D: '↓', L: '←', R: '→' };
 
@@ -26,11 +32,32 @@ function level(n) {
     if (running) return; 
     lv = n; 
     rog = []; 
-    reset(); 
+    reset();
+    
     document.querySelectorAll('.lvl').forEach(x => x.classList.remove('active')); 
     document.getElementById('b' + n).classList.add('active'); 
     document.getElementById('title').textContent = levels[n].t;
     document.getElementById('challenge').textContent = levels[n].c; 
+
+    
+
+    if (version === 'v2') {
+
+        const h1 = document.querySelector('h1');
+        h1.textContent = '🐭 Missão: Programar o Rato';
+
+        const legend = document.querySelector('#legend');
+        legend.innerHTML = `
+            <span><i class="mini free">🧀</i>Livre</span>
+            <span><i class="mini water">🪤</i>Armadilha: perde</span>
+            <span><i class="mini wall">🧱</i>Parede: trava</span>
+            <span><i class="mini finish">🏁</i>Chegada</span>
+        `;
+
+        const tip = document.querySelector('#tip');
+        tip.textContent = '💡 Parede não encerra o jogo: o rato fica parado. Você pode corrigir a sequência e executar novamente. Armadilha encerra a missão.'
+    }
+
     msg('Monte seu programa e clique em <b>Executar</b>.', 'info'); 
     render(); 
     renderProg();
@@ -50,8 +77,8 @@ function render() {
         e.textContent = icon[type]; 
         if (r === x.s[0] && c === x.s[1]) e.classList.add('start'); 
         if (st && st.r === r && st.c === c) { 
-            e.innerHTML = '<span class="robot">🤖</span>' 
-            // e.innerHTML = '<span class="robot">🐭</span>' 
+            if(version === 'v2') { e.innerHTML = '<span class="robot">🐭</span>' }
+            else { e.innerHTML = '<span class="robot">🤖</span>' }
         } 
         b.appendChild(e) 
     })); 
@@ -100,16 +127,14 @@ async function run() {
     for (let p of prog) {
         await sleep(500);
         let nr = st.r + delta[p][0], nc = st.c + delta[p][1];
-        if (nr < 0 || nr > 3 || nc < 0 || nc > 3) { msg('🚧 O robô tentou sair do tabuleiro. Essa instrução não pode ser executada. Procure o BUG!', 'warn'); running = false; return }
+        if (nr < 0 || nr > 3 || nc < 0 || nc > 3) { msg('🚧 O personagem tentou sair do tabuleiro. Essa instrução não pode ser executada. Procure o BUG!', 'warn'); running = false; return }
         let target = x.b[nr][nc];
-        if (target === 'x') { msg('🧱 PAREDE! O robô ficou travado. Corrija a instrução e tente novamente!', 'warn'); running = false; return }
+        if (target === 'x') { msg('🧱 PAREDE! O personagem ficou travado. Corrija a instrução e tente novamente!', 'warn'); running = false; return }
         st.r = nr; st.c = nc; st.last = p; st.steps++; render();
-        if (target === 'w') { await sleep(250); msg('💦 SPLASH! O robô caiu na água. Missão encerrada!', 'bad'); running = false; return }
-        if (target === 'z') { await sleep(250); msg('💥 BOOOOM! O robô pisou na bomba. Missão encerrada!', 'bad'); running = false; return }
-        if (target === 'g') { await sleep(250); msg('🎉 PARABÉNS! Você programou o robô para chegar ao destino!', 'ok'); running = false; return }
-        // if (target === 'g') { await sleep(250); msg('🎉 PARABÉNS! Você programou o rato para chegar ao destino!', 'ok'); running = false; return }
+        if (target === 'w') { await sleep(250); msg('💦 SPLASH! O personagem caiu na água. Missão encerrada!', 'bad'); running = false; return }
+        if (target === 'g') { await sleep(250); msg('🎉 PARABÉNS! Você programou o personagem para chegar ao destino!', 'ok'); running = false; return }
     }
-    msg('🤔 O programa terminou, mas o robô não chegou. Encontre o BUG e tente outra sequência!', 'warn'); running = false
+    msg('🤔 O programa terminou, mas o personagem não chegou. Encontre o BUG e tente outra sequência!', 'warn'); running = false
 }
 
 function msg(t, cl) { let e = document.getElementById('msg'); e.className = 'msg ' + cl; e.innerHTML = t }

@@ -11,17 +11,13 @@
 <body>
     <main>
         <h1>🤖 Missão: Programar o Robô</h1>
-        <!-- <h1>🐭 Missão: Programar o Rato</h1> -->
-        <p class="sub">Monte uma sequência de instruções e ajude o robô a chegar à bandeira!</p>
-        <!-- <p class="sub">Monte uma sequência de instruções e ajude o rato a chegar à bandeira!</p> -->
+        <p class="sub">Monte uma sequência de instruções e ajude o personagem a chegar à bandeira!</p>
         <div class="layout">
             <section class="card">
                 <div id="board" class="board"></div>
-                <div class="legend">
+                <div class="legend" id="legend">
                     <span><i class="mini free">👣</i>Livre</span>
-                    <!-- <span><i class="mini free">🧀</i>Livre</span> -->
                     <span><i class="mini water">💧</i>Água:perde</span>
-                    <!-- <span><i class="mini water">🪤</i>Armadilha:perde</span> -->
                     <span><i class="mini wall">🧱</i>Parede: trava</span>
                     <span><i class="mini finish">🏁</i>Chegada</span>
                 </div>
@@ -48,8 +44,7 @@
                     <button id="b1" class="lvl active" onclick="level(1)">1</button>
                     <button id="b2" class="lvl" onclick="level(2)">2</button>
                 </div>
-                <div class="tip">💡 Parede não encerra o jogo: o robô fica parado. Você pode corrigir a sequência e executar novamente. Água encerra a missão.</div>
-                <!-- <div class="tip">💡 Parede não encerra o jogo: o rato fica parado. Você pode corrigir a sequência e executar novamente. Armadilha encerra a missão.</div> -->
+                <div class="tip" id="tip">💡 Parede não encerra o jogo: o robô fica parado. Você pode corrigir a sequência e executar novamente. Água encerra a missão.</div>
             </aside>
         </div>
         <script src="main.js"></script>
