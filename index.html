@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Missão: Programar o Robô</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <h1>🤖 Missão: Programar o Robô</h1>
+        <!-- <h1>🐭 Missão: Programar o Rato</h1> -->
+        <p class="sub">Monte uma sequência de instruções e ajude o robô a chegar à bandeira!</p>
+        <!-- <p class="sub">Monte uma sequência de instruções e ajude o rato a chegar à bandeira!</p> -->
+        <div class="layout">
+            <section class="card">
+                <div id="board" class="board"></div>
+                <div class="legend">
+                    <span><i class="mini free">👣</i>Livre</span>
+                    <!-- <span><i class="mini free">🧀</i>Livre</span> -->
+                    <span><i class="mini water">💧</i>Água:perde</span>
+                    <!-- <span><i class="mini water">🪤</i>Armadilha:perde</span> -->
+                    <span><i class="mini wall">🧱</i>Parede: trava</span>
+                    <span><i class="mini finish">🏁</i>Chegada</span>
+                </div>
+            </section>
+            <aside class="card panel">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+                    <h2 id="title" style="margin:0">Nível 1</h2>
+                    <span id="stepCounter" class="small">0 passos</span>
+                </div>
+                <div id="challenge" class="challenge"></div>
+                <strong>📋 Seu programa</strong>
+                <div id="program" class="program"><span class="placeholder">Clique nos comandos para montar sua sequência.</span></div>
+                <div class="buttons"><button class="cmd" onclick="add('U')"><b>↑</b>Cima</button><button class="cmd"
+                        onclick="add('D')"><b>↓</b>Baixo</button><button class="cmd"
+                        onclick="add('L')"><b>←</b>Esquerda</button><button class="cmd"
+                        onclick="add('R')"><b>→</b>Direita</button></div>
+                <div class="actions">
+                    <button class="run" onclick="run()">▶ Executar</button>
+                    <button class="clear" onclick="clearProgram()">🗑️ Limpar</button>
+                </div>
+                <div id="msg" class="msg info">Monte seu programa e clique em Executar.</div>
+                <h2 style="margin-top:15px">🎯 Níveis</h2>
+                <div class="levels">
+                    <button id="b1" class="lvl active" onclick="level(1)">1</button>
+                    <button id="b2" class="lvl" onclick="level(2)">2</button>
+                </div>
+                <div class="tip">💡 Parede não encerra o jogo: o robô fica parado. Você pode corrigir a sequência e executar novamente. Água encerra a missão.</div>
+                <!-- <div class="tip">💡 Parede não encerra o jogo: o rato fica parado. Você pode corrigir a sequência e executar novamente. Armadilha encerra a missão.</div> -->
+            </aside>
+        </div>
+        <script src="main.js"></script>
+    </main>
+
+</body>
+
+</html>
