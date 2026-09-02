@@ -5,21 +5,29 @@ const levels = {
                 t: 'Nível 1 — Primeira missão', 
                 c: 'Chegue à bandeira usando as setas. Evite a água!', 
                 s: [3, 0], 
-                b: [['f', 'f', 'f', 'g'], ['f', 'w', 'f', 'w'], ['f', 'f', 'f', 'w'], ['f', 'f', 'w', 'w']] 
+                b: [
+                    ['f', 'f', 'f', 'g'], 
+                    ['f', 'w', 'f', 'w'], 
+                    ['f', 'f', 'f', 'w'], 
+                    ['f', 'f', 'w', 'w']] 
             },
             2: { 
                 t: 'Nível 2 — Cuidado com as paredes', 
                 c: 'Contorne as paredes e chegue à bandeira. Se bater numa parede, corrija seu programa!', 
                 s: [3, 0], 
-                b: [['f', 'f', 'x', 'g'], ['f', 'f', 'x', 'f'], ['f', 'f', 'w', 'w'], ['f', 'x', 'w', 'w']] 
+                b: [
+                    ['f', 'f', 'b', 'g'], 
+                    ['f', 'f', 'b', 'f'], 
+                    ['f', 'f', 'f', 'f'], 
+                    ['f', 'b', 'w', 'w']] 
             }
 };
 
-let icon = { f: '👣', w: '💧', x: '🧱', g: '🏁' };
+let icon = { f: '👣', w: '💧', b: '🧱', g: '🏁' };
 
 if(version === 'v2')
 {
-    icon = { f: '🧀', w: '🪤', x: '🧱', g: '🏁' };
+    icon = { f: '🧀', w: '🪤', b: '🧱', g: '🏁' };
     levels[1].c = 'Chegue à bandeira usando as setas. Evite as armadilhas.';
 }
 
@@ -74,7 +82,7 @@ function render() {
     b.innerHTML = ''; 
     x.b.forEach((row, r) => row.forEach((type, c) => { 
         let e = document.createElement('div'); 
-        e.className = 'cell ' + ({ f: 'free', w: 'water', x: 'wall', g: 'finish' }[type]); 
+        e.className = 'cell ' + ({ f: 'free', w: 'water', b: 'wall', g: 'finish' }[type]); 
         e.textContent = icon[type]; 
         if (r === x.s[0] && c === x.s[1]) e.classList.add('start'); 
         if (st && st.r === r && st.c === c) { 
@@ -130,7 +138,7 @@ async function run() {
         let nr = st.r + delta[p][0], nc = st.c + delta[p][1];
         if (nr < 0 || nr > 3 || nc < 0 || nc > 3) { msg('🚧 O personagem tentou sair do tabuleiro. Essa instrução não pode ser executada. Procure o BUG!', 'warn'); running = false; return }
         let target = x.b[nr][nc];
-        if (target === 'x') { msg('🧱 PAREDE! O personagem ficou travado. Corrija a instrução e tente novamente!', 'warn'); running = false; return }
+        if (target === 'b') { msg('🧱 PAREDE! O personagem ficou travado. Corrija a instrução e tente novamente!', 'warn'); running = false; return }
         st.r = nr; st.c = nc; st.last = p; st.steps++; render();
         if (target === 'w' && version === 'v2') { await sleep(250); msg('😥AIII! O personagem caiu na armadilha. Missão encerrada!', 'bad'); running = false; return }
         if (target === 'w') { await sleep(250); msg('💦 SPLASH! O personagem caiu na água. Missão encerrada!', 'bad'); running = false; return }
